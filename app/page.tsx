@@ -1,4 +1,5 @@
 import Image from "next/image";
+import "./theme-config.css";
 
 export default function Home() {
   return (
