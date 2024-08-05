@@ -20,6 +20,8 @@ const links = [
   { href: "/issues", label: "Issues" },
 ];
 
+import { Skeleton } from "@/app/components";
+
 const Navbar = () => {
   return (
     <nav className="border-b mb-5 px-5 py-3">
@@ -59,38 +61,37 @@ const NavLinks = () => {
 
 const DropdownMenuContent = () => {
   const { status, data: session } = useSession();
+  if (status === "loading") return <Skeleton width="3rem" />;
+  if (status === "unauthenticated")
+    return <Link href="/api/auth/signin">Sign in</Link>;
   return (
     <Box>
-      {status === "authenticated" ? (
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger>
-            <Avatar
-              src={session.user!.image!}
-              fallback="?"
-              size="2"
-              radius="full"
-              className="cursor-pointer"
-            />
-          </DropdownMenu.Trigger>
-          <DropdownMenu.Content>
-            <DropdownMenu.Label>
-              <Text size="2">{session.user!.email}</Text>
-            </DropdownMenu.Label>
-            <DropdownMenu.Item>
-              <Link
-                className={classnames({
-                  "nav-link": true,
-                })}
-                href="/api/auth/signout"
-              >
-                Sign out
-              </Link>
-            </DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
-      ) : (
-        <Link href="/api/auth/signin">Sign in</Link>
-      )}
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            src={session!.user!.image!}
+            fallback="?"
+            size="2"
+            radius="full"
+            className="cursor-pointer"
+          />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>
+            <Text size="2">{session!.user!.email}</Text>
+          </DropdownMenu.Label>
+          <DropdownMenu.Item>
+            <Link
+              className={classnames({
+                "nav-link": true,
+              })}
+              href="/api/auth/signout"
+            >
+              Sign out
+            </Link>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
     </Box>
   );
 };

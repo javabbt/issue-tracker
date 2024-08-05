@@ -28,7 +28,7 @@ export default function RootLayout({
           <Theme accentColor="iris" radius="large" scaling="105%">
             <Navbar />
             <main className="p-5">{children}</main>
-            <ThemePanel />
+            {/* <ThemePanel /> */}
           </Theme>
         </AuthProvider>
       </body>
