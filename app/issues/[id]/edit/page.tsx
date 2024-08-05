@@ -1,7 +1,6 @@
 import { prisma } from "@/prisma/client";
-import { notFound } from "next/navigation";
-import React from "react";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 import IssueFormSkeleton from "./loading";
 
 interface Props {
