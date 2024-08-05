@@ -22,7 +22,7 @@ const DetailPage = async ({ params: { id } }: Props) => {
 
   return (
     <Grid columns={{ initial: "1", md: "5" }} gap="5">
-      <Box className="lg:col-span-4">
+      <Box className="col-span-4">
         <IssueDetails issue={issue} />
       </Box>
       <Flex direction="column" gap="4">
