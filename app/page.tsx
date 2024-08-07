@@ -1,27 +1,29 @@
-import Image from "next/image";
-import "./theme-config.css";
-import Pagination from "./components/Pagination";
-import LatestIssues from "./LatestIssues";
-import IssueSummary from "./IssueSummary";
 import { prisma } from "@/prisma/client";
+import { Flex, Grid } from "@radix-ui/themes";
+import IssueChart from "./IssueChart";
+import IssueSummary from "./IssueSummary";
+import LatestIssues from "./LatestIssues";
+import "./theme-config.css";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: { page: string };
 }) {
-  const openedIssues = await prisma.issue.count({ where: { status: "OPEN" } });
-  const closedIssues = await prisma.issue.count({
+  const open = await prisma.issue.count({ where: { status: "OPEN" } });
+  const closed = await prisma.issue.count({
     where: { status: "CLOSED" },
   });
-  const inProgressIssues = await prisma.issue.count({
+  const inProgress = await prisma.issue.count({
     where: { status: "IN_PROGRESS" },
   });
   return (
-    <IssueSummary
-      open={openedIssues}
-      closed={closedIssues}
-      inProgress={inProgressIssues}
-    />
+    <Grid columns={{ initial: "1", md: "2" }} gap="5">
+      <Flex direction="column" gap="5">
+        <IssueSummary open={open} inProgress={inProgress} closed={closed} />
+        <IssueChart open={open} inProgress={inProgress} closed={closed} />
+      </Flex>
+      <LatestIssues />
+    </Grid>
   );
 }

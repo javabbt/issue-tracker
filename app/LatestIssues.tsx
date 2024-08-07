@@ -24,7 +24,7 @@ type UsersWithPosts = Prisma.PromiseReturnType<
 const LatestIssues = async () => {
   const issues: UsersWithPosts = await getIssuesWithAssignedUsers();
   return (
-    <>
+    <div>
       <Heading size={"4"} mb="5">
         Latest Issues
       </Heading>
@@ -54,7 +54,7 @@ const LatestIssues = async () => {
           </Table.Body>
         </Table.Root>
       </Card>
-    </>
+    </div>
   );
 };
 
