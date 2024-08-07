@@ -1,10 +1,7 @@
 import Image from "next/image";
 import "./theme-config.css";
+import Pagination from "./components/Pagination";
 
 export default function Home() {
-  return (
-    <div>
-      <p>Hello World</p>
-    </div>
-  );
+  return <Pagination itemCount={100} pageSize={10} currentPage={1} />;
 }
