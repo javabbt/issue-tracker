@@ -21,7 +21,7 @@ const IssuesPage = async ({
       status: isValid ? searchParams.status : undefined,
     },
   });
-  const colums: { label: String; value: keyof Issue; className?: String }[] = [
+  const colums: { label: String; value: keyof Issue; className?: string }[] = [
     { value: "title", label: "Issue" },
     { value: "status", label: "Status", className: "hidden md:table-cell" },
     { value: "createdAt", label: "Created", className: "hidden md:table-cell" },
