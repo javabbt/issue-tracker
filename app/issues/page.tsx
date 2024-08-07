@@ -16,16 +16,25 @@ const IssuesPage = async ({
   };
 }) => {
   const isValid = Object.values(Status).includes(searchParams.status);
-  const issues = await prisma.issue.findMany({
-    where: {
-      status: isValid ? searchParams.status : undefined,
-    },
-  });
+
   const colums: { label: String; value: keyof Issue; className?: string }[] = [
     { value: "title", label: "Issue" },
     { value: "status", label: "Status", className: "hidden md:table-cell" },
     { value: "createdAt", label: "Created", className: "hidden md:table-cell" },
   ];
+
+  const orderBy = colums
+    .map((column) => column.value)
+    .includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: {
+      status: isValid ? searchParams.status : undefined,
+    },
+    orderBy,
+  });
+
   return (
     <>
       <IssuesToolbar />
