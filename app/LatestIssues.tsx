@@ -1,9 +1,8 @@
 import { prisma } from "@/prisma/client";
+import { Prisma } from "@prisma/client";
 import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes";
-import React from "react";
-import IssueStatusBadge from "./components/IssueStatusBadge";
 import Link from "next/link";
-import { Issue, Prisma } from "@prisma/client";
+import IssueStatusBadge from "./components/IssueStatusBadge";
 
 async function getIssuesWithAssignedUsers() {
   return prisma.issue.findMany({

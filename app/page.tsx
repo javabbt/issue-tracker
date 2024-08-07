@@ -4,6 +4,7 @@ import IssueChart from "./IssueChart";
 import IssueSummary from "./IssueSummary";
 import LatestIssues from "./LatestIssues";
 import "./theme-config.css";
+import { Metadata } from "next";
 
 export default async function Home({
   searchParams,
@@ -27,3 +28,10 @@ export default async function Home({
     </Grid>
   );
 }
+
+const metadata: Metadata = {
+  title: "Issue Tracker Dashbord",
+  description: "Vue a summary of the latest issues",
+};
+
+export { metadata };
