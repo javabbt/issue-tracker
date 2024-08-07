@@ -3,9 +3,19 @@ import { Table } from "@radix-ui/themes";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import Link from "../components/Link";
 import IssuesToolbar from "./IssuesToolbar";
+import { Status } from "@prisma/client";
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+const IssuesPage = async ({
+  searchParams,
+}: {
+  searchParams: { status: Status };
+}) => {
+  const isValid = Object.values(Status).includes(searchParams.status);
+  const issues = await prisma.issue.findMany({
+    where: {
+      status: isValid ? searchParams.status : undefined,
+    },
+  });
   return (
     <>
       <IssuesToolbar />
